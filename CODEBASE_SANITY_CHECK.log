@@ -145,9 +145,58 @@ should be documented below with timestamp and reason.
   - Impact: Eliminated undefined API_KEY errors
   - Reason: OpenRouter API integration not configured
 
+[2026-04-17 12:47] COMPLETED: Updated .gitignore
+  - Status: ✓ Comprehensive Python/ML project exclusions added
+  - Added: __pycache__, venv, .jupyter, data files, logs, models, etc.
+  - Impact: Prevents tracking of non-essential files
+
+[2026-04-17 12:48] COMPLETED: Created modular Python scripts from Jupyter notebook
+  - Status: ✓ Analysis notebook converted to 5 production-ready modules
+  - Created:
+    1. src/data_download.py - Kaggle dataset acquisition
+    2. src/eda.py - Exploratory data analysis functions
+    3. src/data_preparation.py - Feature preprocessing & train/test split
+    4. src/model_training.py - LogisticRegression, RandomForest, XGBoost
+    5. src/pipeline.py - Pipeline orchestration (renamed from main.py)
+    6. src/__init__.py - Package initialization
+  - Features:
+    * Comprehensive logging throughout
+    * Modular, reusable functions
+    * Cross-validation setup
+    * Model comparison framework
+    * Stratified data splitting
+    * Proper documentation and docstrings
+
+[2026-04-17 13:20] COMPLETED: Model persistence and pipeline refactor
+  - Status: ✓ Models now saved after evaluation
+  - Changes made:
+    1. Updated src/model_training.py with model saving functionality
+       - Added save_model() function using joblib
+       - Added setup_model_directory() for organized model storage
+       - Added save_model() method to each model class
+       - Added timestamp to saved model filenames for versioning
+       - Models saved to: /home/rohit/projects/customer_churn/models/
+    2. Renamed src/main.py → src/pipeline.py
+       - Updated pipeline orchestration entry point
+       - Maintains same functionality with new name
+  - Model storage structure:
+    * models/logistic_regression_pipeline_YYYYMMDD_HHMMSS.pkl
+    * models/random_forest_pipeline_YYYYMMDD_HHMMSS.pkl
+    * models/xgboost_model_YYYYMMDD_HHMMSS.pkl
+  - Results dictionary now includes:
+    * model_path: Path to saved model file
+    * f1_score: Cross-validation F1 score
+    * predictions: Test set predictions
+    * confusion_matrix: Model confusion matrix
+  - Benefits:
+    * Model versioning with timestamps
+    * Easy model tracking and reproduction
+    * Organized model management in /models/ folder
+    * Reproducible pipeline execution
+
 [NEXT] Consider action on empty files:
-  - scripts/data_cleaning.py (empty)
-  - scripts/pipeline.py (empty) 
-  - src/user_interface.py (empty)
-  - notebooks/modeling.ipynb (no cells)
+  - scripts/data_cleaning.py (empty - may be redundant)
+  - scripts/pipeline.py (empty - may be redundant, use src/pipeline.py instead)
+  - src/user_interface.py (empty - requires implementation)
+  - notebooks/modeling.ipynb (no cells - can be deleted)
 
