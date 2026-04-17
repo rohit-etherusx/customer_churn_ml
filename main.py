@@ -195,18 +195,16 @@ def phase_1_business_prediction():
             tenure = st.number_input("Tenure (months)", min_value=0, max_value=72, value=12)
         
         with col2:
-            st.markdown("**Service Charges**")
+            st.markdown("**Charges**")
             monthly_charges = st.number_input("Monthly Charges ($)", min_value=0.0, max_value=500.0, value=65.0)
             total_charges = st.number_input("Total Charges ($)", min_value=0.0, max_value=10000.0, value=800.0)
-            contract = st.selectbox("Contract Type", ["Month-to-month", "One year", "Two year"])
         
         with col3:
-            st.markdown("**Services**")
-            internet_service = st.selectbox("Internet Service", ["DSL", "Fiber optic", "No"])
-            online_security = st.selectbox("Online Security", ["Yes", "No", "No internet service"])
-            tech_support = st.selectbox("Tech Support", ["Yes", "No", "No internet service"])
+            st.markdown("**Contract & Payment**")
+            contract = st.selectbox("Contract Type", ["Month-to-month", "One year", "Two year"])
+            payment_method = st.selectbox("Payment Method", ["Bank transfer", "Credit card", "Electronic check", "Mailed check"])
         
-        # Create dataframe from inputs
+        # Create dataframe from inputs (match training data)
         customer_data = pd.DataFrame({
             'Age': [age],
             'Gender': [gender],
@@ -214,9 +212,7 @@ def phase_1_business_prediction():
             'MonthlyCharges': [monthly_charges],
             'TotalCharges': [total_charges],
             'Contract': [contract],
-            'InternetService': [internet_service],
-            'OnlineSecurity': [online_security],
-            'TechSupport': [tech_support]
+            'PaymentMethod': [payment_method]
         })
     
     else:  # Upload CSV

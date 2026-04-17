@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 def prepare_target_features(df):
     """
     Separate features and target variable.
+    Drops CustomerID (just an ID, not a predictor) and selects only useful features.
     
     Args:
         df (pd.DataFrame): Input dataframe
@@ -28,7 +29,8 @@ def prepare_target_features(df):
     """
     logger.info("Preparing features and target...")
     
-    X = df.drop('Churn', axis=1)
+    # Drop CustomerID and Churn
+    X = df.drop(['CustomerID', 'Churn'], axis=1)
     y = df['Churn'].map({'Yes': 1, 'No': 0})
     
     logger.info(f"Features shape: {X.shape}")
